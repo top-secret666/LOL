@@ -43,5 +43,3 @@ public class User extends AbstractEntity {
            this.authority = authority;
     }
     }
-
-
