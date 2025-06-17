@@ -1,6 +1,7 @@
 package by.vstu.zamok.lol.loltournament.repository;
 
 import by.vstu.zamok.lol.loltournament.entity.Team;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -21,4 +22,7 @@ public interface TeamRepository extends JpaRepository<Team, Long>, JpaSpecificat
 
     @Query("SELECT COUNT(tour) FROM Team t JOIN t.tournaments tour WHERE t.id = :teamId")
     Long countTournamentsByTeamId(@Param("teamId") Long teamId);
+    List<Team> findByNameContainingIgnoreCaseOrTagContainingIgnoreCase(
+            String name, String tag, Pageable pageable);
+
 }

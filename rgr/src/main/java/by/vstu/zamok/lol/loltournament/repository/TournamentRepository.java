@@ -1,6 +1,7 @@
 package by.vstu.zamok.lol.loltournament.repository;
 
 import by.vstu.zamok.lol.loltournament.entity.Tournament;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -18,5 +19,6 @@ public interface TournamentRepository extends JpaRepository<Tournament, Long>, J
     List<Tournament> findByCreatorId(Long creatorId);
     @Query("SELECT t FROM Tournament t LEFT JOIN FETCH t.teams WHERE t.id = :id")
     Optional<Tournament> findByIdWithTeams(@Param("id") Long id);
-
+    List<Tournament> findByNameContainingIgnoreCase(String name, Pageable pageable);
+    List<Tournament> findByNameContainingIgnoreCaseAndStatus(String name, Tournament.TournamentStatus status, Pageable pageable);
 }

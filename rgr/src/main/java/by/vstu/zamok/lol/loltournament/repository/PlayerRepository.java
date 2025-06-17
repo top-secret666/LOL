@@ -1,8 +1,10 @@
 package by.vstu.zamok.lol.loltournament.repository;
 
 import by.vstu.zamok.lol.loltournament.entity.Player;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,4 +16,11 @@ public interface PlayerRepository extends JpaRepository<Player, Long>, JpaSpecif
     List<Player> findByTeamId(Long teamId);
     List<Player> findByRole(Player.PlayerRole role);
     List<Player> findByPlayerRank(Player.PlayerRank playerRank);
+    List<Player> findByNicknameContainingIgnoreCaseOrRealNameContainingIgnoreCase(
+            String nickname, String realName, Pageable pageable);
+    List<Player> findByNicknameContainingIgnoreCaseAndRole(
+            String nickname, Player.PlayerRole role, Pageable pageable);
+
+    @Query("SELECT DISTINCT p.playerRank FROM Player p WHERE p.playerRank IS NOT NULL")
+    List<String> findDistinctRanks();
 }
