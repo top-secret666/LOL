@@ -2,7 +2,7 @@
 <div align="center">
 <img src="https://github.com/user-attachments/assets/0b685d4c-231b-4126-8a3d-06975e64d41b"/>
 
-# LOL // Tournament Arena
+# Tournament Arena
 
 **Full-stack LoL tournament platform**: Spring Boot (API + JWT) + MySQL + Next.js (front).
 
